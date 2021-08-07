@@ -24,7 +24,9 @@ const customStyles = {
     },
 };
 
-Modal.setAppElement("#root");
+if (process.env.NODE_ENV !== "test") {
+    Modal.setAppElement("#root");
+}
 
 const now = moment().minutes(0).seconds(0).add(1, "hours"); // le pongo que arranque con minutos en 0 y segundos en 0, y aparte que añada 1 hora
 const nowPlus1 = now.clone().add(1, "hours"); // le pongo que arranque con minutos en 0 y segundos en 0, y aparte que añada 1 hora
@@ -124,6 +126,7 @@ export const CalendarModal = () => {
             onRequestClose={closeModal}
             style={customStyles}
             closeTimeoutMS={200}
+            ariaHideApp={!process.env.NODE_ENV === "test"}
             className="modal"
             overlayClassName="modal-fondo"
         >
